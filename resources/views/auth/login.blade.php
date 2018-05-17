@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="col-md-5 mr-auto">
-                  <div class="social text-center">
+                  {{-- <div class="social text-center">
                     <button class="btn btn-just-icon btn-round btn-twitter">
                       <i class="fa fa-twitter"></i>
                     </button>
@@ -58,8 +58,9 @@
                     <button class="btn btn-just-icon btn-round btn-facebook">
                       <i class="fa fa-facebook"> </i>
                     </button>
-                    <h4> Ingresa tus datos </h4>
-                  </div>
+                  </div> --}}
+
+                  <h4 class="text-center"> Ingresa tus datos </h4>
 
                   <form class="form" method="POST" action="{{ route('login') }}">
                     @csrf
@@ -71,7 +72,14 @@
                             <i class="material-icons">mail</i>
                           </span>
                         </div>
-                        <input id="email" type="email" placeholder="Email..." class="form-control{{ $errors->has('email') ? ' Incorrecto' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                        <input id="email" type="email" placeholder="Email..." class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                        
+                        @if ($errors->has('email'))
+                          <span class="invalid-feedback">
+                              <strong>{{ $errors->first('email') }}</strong>
+                          </span>
+                        @endif
+                        
                       </div>
                     </div>
                     <div class="form-group">
@@ -81,7 +89,14 @@
                             <i class="material-icons">lock_outline</i>
                           </span>
                         </div>
-                        <input id="password" type="password" placeholder="Password..." class="form-control{{ $errors->has('password') ? ' Incorrecto' : '' }}" name="password" required>
+                        <input id="password" type="password" placeholder="Password..." class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                        
+                        @if ($errors->has('password'))
+                          <span class="invalid-feedback">
+                              <strong>{{ $errors->first('password') }}</strong>
+                          </span>
+                        @endif
+                        
                       </div>
                     </div>
                     <div class="form-check">
@@ -148,6 +163,6 @@
         </div>
       </div>
     </footer>
-
+</div>
 
 @endsection
